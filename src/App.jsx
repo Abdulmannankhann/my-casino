@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -25,6 +24,10 @@ import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import Login from "./pages/Login";
+import { Chip } from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import GamesIcon from "@mui/icons-material/Games";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
 
 const drawerWidth = 240;
 
@@ -80,15 +83,44 @@ function ResponsiveDrawer(props) {
                 navigate(`/${text.toLowerCase()}`);
               }}
             >
-              <ListItemIcon>
-                <VideogameAssetIcon />
-              </ListItemIcon>
+              {index == 0 && (
+                <ListItemIcon>
+                  <VideogameAssetIcon />
+                </ListItemIcon>
+              )}
+              {index == 1 && (
+                <ListItemIcon>
+                  <GamesIcon />
+                </ListItemIcon>
+              )}
+              {index == 2 && (
+                <ListItemIcon>
+                  <SmartToyIcon />
+                </ListItemIcon>
+              )}
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
+      <Divider />
+      <List>
+        {["Withdraw"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                navigate(`/${text.toLowerCase()}`);
+              }}
+            >
+              <ListItemIcon>
+                <AttachMoneyIcon />
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 
@@ -108,14 +140,31 @@ function ResponsiveDrawer(props) {
             }}
           >
             <Toolbar>
-              <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
+              <IconButton size="large" color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap component="div">
+              <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
                 Casino
               </Typography>
+              <Chip label={`Points: ${500}`} color="warning" />
             </Toolbar>
           </AppBar>
+
+          {/*<Toolbar>
+            <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
+              MUI
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
+            </Search>
+          </Toolbar>*/}
+
           <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
             {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
             <Drawer

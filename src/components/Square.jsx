@@ -1,8 +1,12 @@
 import "./Square.css";
 import { motion } from "framer-motion";
 
-const Square = ({ ind, updateSquares, clsName }) => {
+const Square = ({ ind, updateSquares, clsName, startGame }) => {
   const handleClick = () => {
+    if (!startGame) {
+      alert("Click Start game to set your bet!");
+      return;
+    }
     updateSquares(ind);
   };
   return (

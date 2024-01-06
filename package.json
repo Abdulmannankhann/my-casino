@@ -21,6 +21,7 @@
     "framer-motion": "^10.16.16",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.2",
+    "react-confetti": "^6.1.0",
     "react-custom-roulette": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",

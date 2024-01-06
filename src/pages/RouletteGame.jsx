@@ -67,7 +67,7 @@ const RouletteGame = () => {
   console.log(prizeNumber);
 
   return (
-    <div className="casino-container d-flex align-items-center justify-content-center">
+    <div className="d-flex align-items-center justify-content-center">
       <div>
         <Wheel
           mustStartSpinning={mustSpin}
