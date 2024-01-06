@@ -1,5 +1,6 @@
+import { Button, Typography } from "@mui/material";
 import React from "react";
-import { useAccount, useConnect, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
+import { useAccount, useBalance, useConnect, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
 
 const Profile = () => {
   const { address, connector, isConnected } = useAccount();
@@ -8,19 +9,34 @@ const Profile = () => {
   const { connect, connectors, error, isLoading, pendingConnector } = useConnect();
   const { disconnect } = useDisconnect();
 
+  const { data: balance } = useBalance({
+    address: address,
+  });
+
   if (isConnected) {
     return (
       <div>
+        {connector && <Typography color="green">Connected to {connector.name}</Typography>}
         {!!ensAvatar && <img src={ensAvatar} alt="ENS Avatar" />}
-        <p>{ensName ? `${ensName} (${address})` : address}</p>
-        {connector && <p>Connected to {connector.name}</p>}
-        <button
+        <Typography>
+          Wallet Address: <strong>{address}</strong>
+        </Typography>
+        {balance && (
+          <Typography>
+            Balance:{" "}
+            <strong>
+              {balance?.formatted} {balance?.symbol}
+            </strong>
+          </Typography>
+        )}
+        <Button
+          color="error"
           onClick={() => {
             disconnect();
           }}
         >
           Disconnect
-        </button>
+        </Button>
       </div>
     );
   }
@@ -28,14 +44,14 @@ const Profile = () => {
   return (
     <div className="form-web3">
       {connectors.map((connector) => (
-        <button disabled={!connector.ready} key={connector.id} onClick={() => connect({ connector })}>
+        <Button disabled={!connector.ready} key={connector.id} onClick={() => connect({ connector })}>
           {connector.name}
           {!connector.ready && " (unsupported)"}
           {isLoading && connector.id === pendingConnector?.id && " (connecting)"}
-        </button>
+        </Button>
       ))}
 
-      {error && <div>{error.message}</div>}
+      {error && <Typography>{error.message}</Typography>}
     </div>
   );
 };
