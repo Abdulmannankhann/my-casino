@@ -13,7 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import TikTakToe from "./pages/TikTakToe";
 import Home from "./pages/Home";
 import RouletteGame from "./pages/RouletteGame";
@@ -34,6 +34,7 @@ import BitCasino from "./assets/images/bitCasino.svg";
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+  const location = useLocation();
   const navigate = useNavigate();
   const balance = useSelector((state) => state.user.casinoPoints);
   const { window } = props;
@@ -45,7 +46,7 @@ function ResponsiveDrawer(props) {
 
   React.useEffect(() => {
     const handleVisibilityChange = () => {
-      document.title = document.hidden ? "Earn more at peak hours!" : "Casino";
+      document.title = document.hidden ? "Earn more at peak hours!" : "Bitcasino Clone";
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
@@ -171,8 +172,8 @@ function ResponsiveDrawer(props) {
               <IconButton size="large" color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-                Casino Demo
+              <Typography className="text-capitalize" variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
+                {location?.pathname?.slice(1)}
               </Typography>
               <Chip label={`Points: ${balance}`} color="warning" />
             </Toolbar>

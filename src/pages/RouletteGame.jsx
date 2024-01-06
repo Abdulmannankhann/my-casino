@@ -168,7 +168,7 @@ const RouletteGame = () => {
           </Box>
         </Typography>
         <Button disabled={startGame} onClick={handleStartGame} variant="contained" className="mb-4">
-          Start Game
+          Spin Wheel
         </Button>
       </Box>
 
@@ -257,7 +257,12 @@ const RouletteGame = () => {
       <Dialog open={winner} onClose={resetGame} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">Congratulations 🎉</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">{bet * 2} casino points addedd to your wallet points!</DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            <strong>
+              Its {isOddOrEven(prizeNumber) ? "Even" : "Odd"}: {prizeNumber}
+            </strong>
+            , {bet * 2} casino points added to your wallet points!
+          </DialogContentText>
           <DialogContentText id="alert-dialog-description">Play more to earn more!</DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -269,7 +274,12 @@ const RouletteGame = () => {
       <Dialog open={loose} onClose={resetGame} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">Opps 👎</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">Oops, you lost!</DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            Oops, you lost!, its
+            <strong>
+              {isOddOrEven(prizeNumber) ? "Even" : "Odd"}: {prizeNumber}
+            </strong>
+          </DialogContentText>
           <DialogContentText id="alert-dialog-description">Better luck next time!</DialogContentText>
         </DialogContent>
         <DialogActions>
