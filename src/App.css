@@ -1,38 +1,163 @@
-.App {
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #222;
+  font-family: consolas;
+}
+
+.tic-tac-toe {
+  width: fit-content;
+  margin: 40px auto;
   text-align: center;
 }
+.tic-tac-toe h1 {
+  color: #eee;
+}
+/*
+.tic-tac-toe button {
+  padding: 8px 12px;
+  margin: 25px;
+  background: transparent;
+  border: 2px solid #eee;
+  color: #eee;
+  width: 100px;
+  border-radius: 5px;
+  transition: 0.2s;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-.App-logo {
-  height: 40vmin;
+.tic-tac-toe button:hover {
+  background: #eee;
+  color: #222;
+}*/
+.tic-tac-toe .game {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.turn {
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+  width: fit-content;
+  position: relative;
+  border-radius: 10px;
+}
+
+.turn .square,
+.winner .square {
+  width: 70px;
+  height: 70px;
   pointer-events: none;
+  border-color: transparent;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.turn .square span.x::before,
+.turn .square span.x::after {
+  background: #222;
+  transition: 0.2s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.turn .square span.o {
+  transition: 0.2s;
+  border-color: #222;
+}
+
+.turn::after {
+  position: absolute;
+  content: "";
+  width: 50%;
+  height: 100%;
+  top: 0;
+  background: #e74c3c;
+  border-radius: 9px;
+  z-index: -1;
+  transition: 0.2s;
+}
+
+.turn.left::after {
+  left: 0;
+}
+
+.turn.left span.o {
+  border-color: #eee;
+}
+.turn.right span.x::before,
+.turn.right span.x::after {
+  background: #eee;
+}
+.turn.right::after {
+  left: 50%;
+}
+
+.winner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.winner .text {
+  background: #111;
+  width: 70%;
+  max-width: 400px;
+  height: 300px;
+  border: 2px solid #eee;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.winner .text h2 {
+  font-size: 2.5em;
+  margin: 15px 0;
+  color: #eee;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.winner .win {
+  margin: 0 auto;
+  width: fit-content;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.highlight-link {
+  border-style: solid !important;
+  border-bottom-width: 2px !important;
+}
+
+.isar-container {
+  margin-top: 68px !important;
+}
+
+.update-data-icon {
+  margin-right: 5px;
+}
+
+li:hover {
+  background: linear-gradient(to bottom, #650392, #760297, #87029b, #98029f, #a804a3);
+  font-weight: 500;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-body:hover {
+  box-shadow: var(--bs-box-shadow) !important;
+}
+
+.casino-container {
+  margin-top: 80px !important;
 }
