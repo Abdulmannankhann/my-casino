@@ -1,8 +1,9 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import { useAccount, useBalance, useConnect, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
+import MetaMaskLogo from "../assets/images/metamask.svg";
 
-const Profile = () => {
+const WagmiLogin = () => {
   const { address, connector, isConnected } = useAccount();
   const { data: ensAvatar } = useEnsAvatar({ address });
   const { data: ensName } = useEnsName({ address });
@@ -44,16 +45,15 @@ const Profile = () => {
   return (
     <div className="form-web3">
       {connectors.map((connector) => (
-        <Button disabled={!connector.ready} key={connector.id} onClick={() => connect({ connector })}>
+        <Button variant="outlined" disabled={!connector.ready} key={connector.id} onClick={() => connect({ connector })} startIcon={<img src={MetaMaskLogo} alt={connector.name} />}>
           {connector.name}
           {!connector.ready && " (unsupported)"}
           {isLoading && connector.id === pendingConnector?.id && " (connecting)"}
         </Button>
       ))}
-
-      {error && <Typography>{error.message}</Typography>}
+      {error && <Typography color="error">{error.message}</Typography>}
     </div>
   );
 };
 
-export default Profile;
+export default WagmiLogin;

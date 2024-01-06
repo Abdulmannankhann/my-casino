@@ -17,7 +17,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import TikTakToe from "./pages/TikTakToe";
 import Home from "./pages/Home";
 import RouletteGame from "./pages/RouletteGame";
-import Slots from "./pages/Slots";
 import { WagmiConfig } from "wagmi";
 import { client } from "./components/WagmiContext";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
@@ -29,6 +28,8 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import GamesIcon from "@mui/icons-material/Games";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import { useSelector } from "react-redux";
+import Withdraw from "./pages/Withdraw";
+import BitCasino from "./assets/images/bitCasino.svg";
 
 const drawerWidth = 240;
 
@@ -54,7 +55,9 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
+      <a href="/">
+        <img src={BitCasino} alt="BitCasino" style={{ margin: 10, marginLeft: 25 }} />
+      </a>
       <Divider />
       <List>
         <ListItem disablePadding>
@@ -88,7 +91,14 @@ function ResponsiveDrawer(props) {
       </List>
       <Divider />
       <List>
-        {["Tik-Tak-Toe", "Roulette", "Slots"].map((text, index) => (
+        <ListItem disablePadding>
+          <ListItemButton disabled sx={{ ml: 1 }}>
+            <ListItemText primary="Games" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <List>
+        {["Tik-Tak-Toe", "Roulette"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => {
@@ -117,6 +127,13 @@ function ResponsiveDrawer(props) {
       </List>
       <Divider />
       <Divider />
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton disabled sx={{ ml: 1 }}>
+            <ListItemText primary="Withdraw" />
+          </ListItemButton>
+        </ListItem>
+      </List>
       <List>
         {["Withdraw"].map((text, index) => (
           <ListItem key={text} disablePadding>
@@ -155,7 +172,7 @@ function ResponsiveDrawer(props) {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-                Casino
+                Casino Demo
               </Typography>
               <Chip label={`Points: ${balance}`} color="warning" />
             </Toolbar>
@@ -194,7 +211,7 @@ function ResponsiveDrawer(props) {
               <Route path="/" element={<Home />} />
               <Route path="/tik-tak-toe" element={<TikTakToe />} />
               <Route path="/roulette" element={<RouletteGame />} />
-              <Route path="/slots" element={<Slots />} />
+              <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<div>404</div>} />
             </Routes>

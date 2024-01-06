@@ -13,10 +13,10 @@ const Home = () => {
 
   return (
     <>
-      <Grid spacing={3} container>
-        <Grid item lg={4} md={4} sm={3}>
+      <Grid spacing={2} container>
+        <Grid item lg={3} md={3} sm={3}>
           <MuiCard sx={muiCardStyle}>
-            <CardMedia sx={{ height: 240 }} image={TikTakToeLogo} title="green iguana" />
+            <CardMedia sx={{ height: 200 }} image={TikTakToeLogo} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Tik Tak Toe
@@ -33,9 +33,9 @@ const Home = () => {
           </MuiCard>
         </Grid>
 
-        <Grid item lg={4} md={4} sm={3}>
+        <Grid item lg={3} md={3} sm={3}>
           <MuiCard sx={muiCardStyle}>
-            <CardMedia sx={{ height: 240 }} image={RouletteLogo} title="green iguana" />
+            <CardMedia sx={{ height: 200 }} image={RouletteLogo} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Roulette
@@ -52,9 +52,9 @@ const Home = () => {
           </MuiCard>
         </Grid>
 
-        <Grid item lg={4} md={4} sm={3}>
+        {/*<Grid item lg={3} md={3} sm={3}>
           <MuiCard sx={muiCardStyle}>
-            <CardMedia sx={{ height: 240 }} image={SlotsLogo} title="green iguana" />
+            <CardMedia sx={{ height: 200 }} image={SlotsLogo} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Slots
@@ -69,7 +69,7 @@ const Home = () => {
               </MuiButton>
             </CardActions>
           </MuiCard>
-        </Grid>
+        </Grid>*/}
       </Grid>
     </>
   );

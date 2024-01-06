@@ -5,3 +5,10 @@ export const muiCardStyle = {
     boxShadow: 5,
   },
 };
+
+export const muiCardShadow = {
+  transition: "box-shadow 0.3s",
+  "&:hover": {
+    boxShadow: 5,
+  },
+};

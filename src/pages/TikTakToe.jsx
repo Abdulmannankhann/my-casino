@@ -12,6 +12,7 @@ function TikTakToe() {
   const [squares, setSquares] = useState(Array(9).fill(""));
   const [turn, setTurn] = useState("x");
   const [winner, setWinner] = useState(null);
+  const [loose, setLoose] = useState(false);
   const [startGame, setStartGame] = useState(false);
   const [bet, setBet] = useState(10);
 
@@ -56,7 +57,8 @@ function TikTakToe() {
       setWinner(W);
       dispatch(addPoints(bet * 2));
     } else if (checkEndTheGame()) {
-      setWinner("x | o");
+      setWinner(false);
+      setLoose(true);
     }
   };
 
@@ -65,6 +67,7 @@ function TikTakToe() {
     setTurn("x");
     setWinner(null);
     setStartGame(false);
+    setLoose(false);
   };
 
   function valuetext(value) {
@@ -90,7 +93,7 @@ function TikTakToe() {
           </Box>
         </Typography>
         <Button disabled={startGame} onClick={handleStartGame} variant="contained" className="mb-4">
-          Start Game
+          Set Bet
         </Button>
       </Box>
 
@@ -112,10 +115,22 @@ function TikTakToe() {
           )}
         </AnimatePresence>
         <Dialog open={winner} onClose={resetGame} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-          <DialogTitle id="alert-dialog-title">Congratulations 🎉</DialogTitle>
+          <DialogTitle id="alert-dialog-title">Congratulations 🎉 {winner} wins!</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">{bet * 2} casino points addedd to your wallet points!</DialogContentText>
             <DialogContentText id="alert-dialog-description">Play more to earn more!</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={resetGame}>Continue</Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Loosing Model */}
+        <Dialog open={loose} onClose={resetGame} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+          <DialogTitle id="alert-dialog-title">Opps 👎</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">Oops, you lost!</DialogContentText>
+            <DialogContentText id="alert-dialog-description">Better luck next time!</DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={resetGame}>Continue</Button>

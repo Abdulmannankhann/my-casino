@@ -40,3 +40,21 @@ export const marks = [
     label: "100",
   },
 ];
+
+export const bettingMarks = () => {
+  return Array.from({ length: 37 }, (value, index) => ({
+    value: index,
+    label: index.toString(),
+  }));
+};
+
+export const isOddOrEven = (number) => {
+  if (typeof number !== "number") {
+    return "Invalid input. Please provide a number.";
+  }
+  if (number % 2 === 0) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
