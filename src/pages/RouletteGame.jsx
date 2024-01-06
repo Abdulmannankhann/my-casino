@@ -1,5 +1,7 @@
+import { Box, Button, Slider, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
+import { marks } from "../utils/functions";
 
 const data = [
   { option: "0" },
@@ -58,6 +60,8 @@ const fontStyle = "normal";
 const RouletteGame = () => {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
+  const [startGame, setStartGame] = useState(false);
+  const [bet, setBet] = useState(10);
 
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
@@ -66,9 +70,34 @@ const RouletteGame = () => {
   };
   console.log(prizeNumber);
 
+  function valuetext(value) {
+    return `${value}`;
+  }
+
+  const handleStartGame = () => {
+    setStartGame(true);
+    handleSpinClick();
+  };
+
+  const handleBetChange = (event, newValue) => {
+    setBet(newValue);
+  };
+
   return (
-    <div className="d-flex align-items-center justify-content-center">
-      <div>
+    <div>
+      <Box>
+        <Typography>
+          {startGame ? "Game Started" : "Choose Bet Amount"}
+          <Box sx={{ mt: 4 }}>
+            <Slider value={bet} onChange={handleBetChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
+          </Box>
+        </Typography>
+        <Button disabled={startGame} onClick={handleStartGame} variant="contained" className="mb-4">
+          Start Game
+        </Button>
+      </Box>
+
+      <div className="d-flex align-items-center justify-content-center">
         <Wheel
           mustStartSpinning={mustSpin}
           prizeNumber={prizeNumber}
@@ -90,7 +119,6 @@ const RouletteGame = () => {
           radiusLineColor={radiusLineColor}
           radiusLineWidth={radiusLineWidth}
         />
-        <button onClick={handleSpinClick}>SPIN</button>
       </div>
     </div>
   );

@@ -28,17 +28,29 @@ import { Chip } from "@mui/material";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import GamesIcon from "@mui/icons-material/Games";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
   const navigate = useNavigate();
+  const balance = useSelector((state) => state.user.casinoPoints);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  React.useEffect(() => {
+    const handleVisibilityChange = () => {
+      document.title = document.hidden ? "Earn more at peak hours!" : "Casino";
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   const drawer = (
     <div>
@@ -124,7 +136,6 @@ function ResponsiveDrawer(props) {
     </div>
   );
 
-  // Remove this const when copying and pasting into your project.
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
@@ -146,34 +157,18 @@ function ResponsiveDrawer(props) {
               <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
                 Casino
               </Typography>
-              <Chip label={`Points: ${500}`} color="warning" />
+              <Chip label={`Points: ${balance}`} color="warning" />
             </Toolbar>
           </AppBar>
 
-          {/*<Toolbar>
-            <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-              MUI
-            </Typography>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
-            </Search>
-          </Toolbar>*/}
-
           <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
-            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
             <Drawer
               container={container}
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
               ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
+                keepMounted: true,
               }}
               sx={{
                 display: { xs: "block", sm: "none" },
