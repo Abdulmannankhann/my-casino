@@ -30,6 +30,8 @@ import SmartToyIcon from "@mui/icons-material/SmartToy";
 import { useSelector } from "react-redux";
 import Withdraw from "./pages/Withdraw";
 import BitCasino from "./assets/images/bitCasino.svg";
+import GuessMyNumber from "./pages/GuessMyNumber";
+import Tenzies from "./pages/Tenzies";
 
 const drawerWidth = 240;
 
@@ -46,7 +48,7 @@ function ResponsiveDrawer(props) {
 
   React.useEffect(() => {
     const handleVisibilityChange = () => {
-      document.title = document.hidden ? "Earn more at peak hours!" : "Bitcasino Clone";
+      document.title = document.hidden ? "Bitcasino Clone - Earn more at peak hours!" : "Bitcasino Clone - First Licensed Crypto Casino | Bitcasino.io";
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
@@ -99,7 +101,7 @@ function ResponsiveDrawer(props) {
         </ListItem>
       </List>
       <List>
-        {["Tik-Tak-Toe", "Roulette"].map((text, index) => (
+        {["Tik-Tak-Toe", "Roulette", "Guess-My-Number", "Tenzies"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => {
@@ -117,6 +119,16 @@ function ResponsiveDrawer(props) {
                 </ListItemIcon>
               )}
               {index == 2 && (
+                <ListItemIcon>
+                  <SmartToyIcon />
+                </ListItemIcon>
+              )}
+              {index == 3 && (
+                <ListItemIcon>
+                  <SmartToyIcon />
+                </ListItemIcon>
+              )}
+              {index == 4 && (
                 <ListItemIcon>
                   <SmartToyIcon />
                 </ListItemIcon>
@@ -212,6 +224,8 @@ function ResponsiveDrawer(props) {
               <Route path="/" element={<Home />} />
               <Route path="/tik-tak-toe" element={<TikTakToe />} />
               <Route path="/roulette" element={<RouletteGame />} />
+              <Route path="/guess-my-number" element={<GuessMyNumber />} />
+              <Route path="/tenzies" element={<Tenzies />} />
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<div>404</div>} />
