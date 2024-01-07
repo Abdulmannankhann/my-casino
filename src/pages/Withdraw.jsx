@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
-import { muiCardStyle } from "../components/MuiStyles.js";
+import { muiCardStyle } from "../utils/functions";
 import MetaMaskLogo from "../assets/images/metamask.svg";
 
 const Withdraw = () => {

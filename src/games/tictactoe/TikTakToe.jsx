@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import Square from "../components/Square";
+import Square from "../../components/tictactoe/Square";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slider, Typography } from "@mui/material";
 import Confetti from "react-confetti";
 import { useDispatch } from "react-redux";
-import { addPoints, removePoints } from "../redux/userRedux";
-import { marks } from "../utils/functions";
+import { addPoints, removePoints } from "../../redux/userRedux";
+import { marks } from "../../utils/functions";
 
 function TikTakToe() {
   const dispatch = useDispatch();

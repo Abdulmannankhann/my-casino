@@ -1,5 +1,5 @@
 import React from "react";
-import Die from "../components/Die";
+import Die from "../../components/tenzies/Die";
 import { nanoid } from "nanoid";
 import { Button, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
 

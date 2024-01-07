@@ -1,12 +1,12 @@
 import { Box, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slider, Stack, Switch, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
-import { bettingMarks, isOddOrEven, marks } from "../utils/functions";
+import { bettingMarks, isOddOrEven, marks } from "../../utils/functions";
 import Tabs from "@mui/material/Tabs";
 import Confetti from "react-confetti";
 import Tab from "@mui/material/Tab";
 import { useDispatch } from "react-redux";
-import { addPoints, removePoints } from "../redux/userRedux";
+import { addPoints, removePoints } from "../../redux/userRedux";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;

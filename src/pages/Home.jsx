@@ -6,7 +6,7 @@ import SlotsLogo from "../assets/images/slots.jpg";
 import { CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { Card as MuiCard } from "@mui/material";
 import { Button as MuiButton } from "@mui/material";
-import { muiCardStyle } from "../components/MuiStyles";
+import { muiCardStyle } from "../utils/functions";
 
 const Home = () => {
   const navigate = useNavigate();

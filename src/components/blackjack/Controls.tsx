@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Slider, Stack, TextField, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import { marks } from "../../utils/functions";
 
 type ControlsProps = {
+  bet: any;
+  startGame: any;
+  setStartGame: any;
   gameState: any;
   buttonState: any;
   betEvent: any;
@@ -11,7 +15,7 @@ type ControlsProps = {
   resetEvent: any;
 };
 
-const Controls: React.FC<ControlsProps> = ({ gameState, buttonState, betEvent, hitEvent, standEvent, resetEvent }) => {
+const Controls: React.FC<ControlsProps> = ({ startGame, setStartGame, gameState, buttonState, bet, betEvent, hitEvent, standEvent, resetEvent }) => {
   const [amount, setAmount] = useState(10);
   const balance = useSelector((state: any) => state.user.casinoPoints);
 
@@ -29,44 +33,50 @@ const Controls: React.FC<ControlsProps> = ({ gameState, buttonState, betEvent, h
     return true;
   };
 
-  const amountChange = (e: any) => {
-    setAmount(e.target.value);
+  const amountChange = (event, newValue) => {
+    setAmount(newValue);
   };
 
   const onBetClick = () => {
     if (validation()) {
+      setStartGame(true);
       betEvent(Math.round(amount * 100) / 100);
     }
   };
 
+  function valuetext(value) {
+    return `${value}`;
+  }
+
   const getControls = () => {
-    if (gameState === 0) {
-      return (
-        <div>
-          <div className="d-flex align-items-center justify-content-center m-4">
-            <Typography className="mx-3">Amount:</Typography>
-            <TextField autoFocus type="number" value={amount} onChange={amountChange} />
-          </div>
-          <Button onClick={() => onBetClick()} variant="contained">
+    return (
+      <>
+        <Box className="mt-2">
+          <Typography>
+            {startGame ? "Game Started" : "Choose Bet Amount"}
+            <Box sx={{ mt: 4 }}>
+              <Slider value={amount} onChange={amountChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
+            </Box>
+          </Typography>
+          <Button disabled={startGame} onClick={() => onBetClick()} variant="contained" className="mb-4">
             Bet
           </Button>
-        </div>
-      );
-    } else {
-      return (
-        <Stack direction="row" spacing={2} className="mt-4">
-          <Button onClick={() => hitEvent()} disabled={buttonState.hitDisabled} variant="contained">
-            Hit
-          </Button>
-          <Button onClick={() => standEvent()} disabled={buttonState.standDisabled} variant="contained">
-            Stand
-          </Button>
-          <Button onClick={() => resetEvent()} disabled={buttonState.resetDisabled} variant="contained">
-            Reset
-          </Button>
-        </Stack>
-      );
-    }
+        </Box>
+        {gameState !== 0 && (
+          <Stack direction="row" spacing={1} className="mt-1 d-flex justify-content-center">
+            <Button onClick={() => hitEvent()} disabled={buttonState.hitDisabled} variant="contained">
+              Hit
+            </Button>
+            <Button onClick={() => standEvent()} disabled={buttonState.standDisabled} variant="contained">
+              Stand
+            </Button>
+            <Button onClick={() => resetEvent()} disabled={buttonState.resetDisabled} variant="contained">
+              Reset
+            </Button>
+          </Stack>
+        )}
+      </>
+    );
   };
 
   return <>{getControls()}</>;

@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import { useAccount, useBalance, useConnect, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
-import MetaMaskLogo from "../assets/images/metamask.svg";
+import MetaMaskLogo from "../../assets/images/metamask.svg";
 
 const WagmiLogin = () => {
   const { address, connector, isConnected } = useAccount();

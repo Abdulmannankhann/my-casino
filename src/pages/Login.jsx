@@ -1,7 +1,7 @@
 import { Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
-import WagmiLogin from "./WagmiLogin.tsx";
-import { muiCardShadow } from "../components/MuiStyles.js";
+import WagmiLogin from "../components/wagmi/WagmiLogin.tsx";
+import { muiCardShadow } from "../utils/functions.js";
 
 const Login = () => {
   return (

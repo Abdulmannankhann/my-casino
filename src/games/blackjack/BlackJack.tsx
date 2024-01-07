@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Status from "../components/blackjack/Status.tsx";
-import Controls from "../components/blackjack/Controls.tsx";
-import Hand from "../components/blackjack/Hand.tsx";
-import jsonData from "../deck.json";
+import Status from "../../components/blackjack/Status.tsx";
+import Controls from "../../components/blackjack/Controls.tsx";
+import Hand from "../../components/blackjack/Hand.tsx";
+import jsonData from "../../deck.json";
 import { useSelector } from "react-redux";
+import WinningModal from "../../components/modals/WinningModal.jsx";
+import LoosingModal from "../../components/modals/LoosingModal.jsx";
 
 const Blackjack: React.FC = () => {
   enum GameState {
@@ -41,6 +43,8 @@ const Blackjack: React.FC = () => {
 
   const balance = useSelector((state: any) => state.user.casinoPoints);
   const [bet, setBet] = useState(0);
+  const [startGame, setStartGame] = useState(false);
+  const [winner, setWinner] = useState(false);
 
   const [gameState, setGameState] = useState(GameState.bet);
   const [message, setMessage] = useState(Message.bet);
@@ -113,6 +117,8 @@ const Blackjack: React.FC = () => {
       standDisabled: false,
       resetDisabled: true,
     });
+    setStartGame(false);
+    if (winner) setWinner(false);
   };
 
   const placeBet = (amount: number) => {
@@ -127,7 +133,7 @@ const Blackjack: React.FC = () => {
       const card = deck[randomIndex];
       deck.splice(randomIndex, 1);
       setDeck([...deck]);
-      console.log("Remaining Cards:", deck.length);
+      //  console.log("Remaining Cards:", deck.length);
       switch (card.suit) {
         case "spades":
           dealCard(dealType, card.value, "♠");
@@ -244,6 +250,7 @@ const Blackjack: React.FC = () => {
     if (userScore > dealerScore || dealerScore > 21) {
       //  setBalance(Math.round((balance + bet * 2) * 100) / 100);
       setMessage(Message.userWin);
+      setWinner(true);
     } else if (dealerScore > userScore) {
       setMessage(Message.dealerWin);
     } else {
@@ -255,11 +262,12 @@ const Blackjack: React.FC = () => {
   return (
     <>
       <Status message={message} />
-      <Controls gameState={gameState} buttonState={buttonState} betEvent={placeBet} hitEvent={hit} standEvent={stand} resetEvent={resetGame} />
+      <Controls startGame={startGame} setStartGame={setStartGame} gameState={gameState} buttonState={buttonState} bet={bet} betEvent={placeBet} hitEvent={hit} standEvent={stand} resetEvent={resetGame} />
       <div className="d-flex justify-content-between">
         <Hand title={`Your Hand (${userScore})`} cards={userCards} />
         <Hand title={`Dealer's Hand (${dealerScore})`} cards={dealerCards} />
       </div>
+      <WinningModal winner={winner} resetGame={resetGame} bet={bet} />
     </>
   );
 };
