@@ -48,7 +48,7 @@ const GuessMyNumber = () => {
     <div>
       <Grid container>
         <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Card>
+          <Card sx={{ p: 1 }}>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
                 {message} - (Betweeen 1 to 20)

@@ -61,10 +61,10 @@ const Tenzies = () => {
   return (
     <Grid container>
       <Grid item lg={12} md={12} sm={12} xs={12}>
-        <Card>
+        <Card sx={{ p: 1 }}>
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
-              Tenzies
+              🎲Tenzies
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
