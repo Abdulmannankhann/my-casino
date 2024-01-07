@@ -1,10 +1,13 @@
 import React from "react";
 import Die from "../../components/tenzies/Die";
 import { nanoid } from "nanoid";
-import { Button, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, Grid, Slider, Typography } from "@mui/material";
+import { marks, valuetext } from "../../utils/functions";
 
 const Tenzies = () => {
   const [start, setStart] = React.useState(false);
+  const [bet, setBet] = React.useState(10);
+  const [winner, setWinner] = React.useState(false);
 
   const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
@@ -46,6 +49,7 @@ const Tenzies = () => {
     const allSameValue = dice.every((die) => die.value === firstValue);
     if (allHeld && allSameValue) {
       setTenzies(true);
+      setWinner(true);
       handleStop();
       if (rolls < best || best === 0) {
         localStorage.setItem("best", rolls);
@@ -83,6 +87,7 @@ const Tenzies = () => {
         handleStart();
         setRolls(0);
         setTenzies(false);
+        setWinner(false);
         setDice(allNewDice());
       }
     } else {
@@ -91,6 +96,14 @@ const Tenzies = () => {
       handleStart();
     }
   }
+
+  const resetGame = () => {
+    setWinner(false);
+    setTenzies(false);
+    setStart(false);
+    setDice(allNewDice());
+    setRolls(0);
+  };
 
   function holdDice(id) {
     if (start) {
@@ -102,9 +115,21 @@ const Tenzies = () => {
     }
   }
 
+  const handleBetChange = (event, newValue) => {
+    setBet(newValue);
+  };
+
   const diceElements = dice.map((die) => <Die {...die} started={start} holdDice={() => holdDice(die.id)} />);
   return (
     <>
+      <Box>
+        <Typography>
+          {start ? "Game Started" : "Choose Bet Amount"}
+          <Box sx={{ mt: 4 }}>
+            <Slider value={bet} onChange={handleBetChange} disabled={start} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
+          </Box>
+        </Typography>
+      </Box>
       <Grid container>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Card sx={{ p: 1 }}>
@@ -147,9 +172,14 @@ const Tenzies = () => {
               </div>
             </CardContent>
             <CardActions>
-              <Button variant="contained" onClick={rollDice}>
-                {!start ? "Start Game" : tenzies ? "New Game" : "Roll"}
+              <Button variant="contained" onClick={rollDice} disabled={winner}>
+                {!start ? "Start Game" : "Roll"}
               </Button>
+              {winner && tenzies && (
+                <Button variant="contained" onClick={resetGame}>
+                  New Game
+                </Button>
+              )}
             </CardActions>
           </Card>
         </Grid>

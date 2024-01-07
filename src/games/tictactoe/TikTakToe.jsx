@@ -5,7 +5,7 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, D
 import Confetti from "react-confetti";
 import { useDispatch } from "react-redux";
 import { addPoints, removePoints } from "../../redux/userRedux";
-import { marks } from "../../utils/functions";
+import { marks, valuetext } from "../../utils/functions";
 
 function TikTakToe() {
   const dispatch = useDispatch();
@@ -69,10 +69,6 @@ function TikTakToe() {
     setStartGame(false);
     setLoose(false);
   };
-
-  function valuetext(value) {
-    return `${value}`;
-  }
 
   const handleStartGame = () => {
     setStartGame(true);

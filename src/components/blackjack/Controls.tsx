@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Slider, Stack, TextField, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import { marks } from "../../utils/functions";
+import { marks, valuetext } from "../../utils/functions";
 
 type ControlsProps = {
   bet: any;
@@ -43,10 +43,6 @@ const Controls: React.FC<ControlsProps> = ({ startGame, setStartGame, gameState,
       betEvent(Math.round(amount * 100) / 100);
     }
   };
-
-  function valuetext(value) {
-    return `${value}`;
-  }
 
   const getControls = () => {
     return (

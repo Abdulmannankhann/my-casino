@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slider, Stack, Switch, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
-import { bettingMarks, isOddOrEven, marks } from "../../utils/functions";
+import { bettingMarks, isOddOrEven, marks, valuetext } from "../../utils/functions";
 import Tabs from "@mui/material/Tabs";
 import Confetti from "react-confetti";
 import Tab from "@mui/material/Tab";
@@ -99,10 +99,6 @@ const RouletteGame = () => {
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
   };
-
-  function valuetext(value) {
-    return `${value}`;
-  }
 
   const handleStartGame = () => {
     if (bettingCategory === 0 && !bettingNumber) {

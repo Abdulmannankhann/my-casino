@@ -1,10 +1,13 @@
-import { Button, Card, CardActions, CardContent, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, Grid, Slider, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { marks, valuetext } from "../../utils/functions";
 
 const GuessMyNumber = () => {
   const [secretNumber, setSecretNumber] = useState(generateRandomNumber());
   const [score, setScore] = useState(20);
   const [highScore, setHighScore] = useState(0);
+  const [bet, setBet] = useState(10);
+  const [startGame, setStartGame] = useState(false);
   const [guess, setGuess] = useState("");
   const [message, setMessage] = useState("🤔 Start guessing...");
   const [isGameEnded, setIsGameEnded] = useState(false);
@@ -42,10 +45,26 @@ const GuessMyNumber = () => {
     setGuess("");
     setSecretNumber(generateRandomNumber());
     setIsGameEnded(false);
+    setStartGame(false);
+  };
+
+  const handleBetChange = (event, newValue) => {
+    setBet(newValue);
   };
 
   return (
-    <div>
+    <>
+      <Box>
+        <Typography>
+          {startGame ? "Game Started" : "Choose Bet Amount"}
+          <Box sx={{ mt: 4 }}>
+            <Slider value={bet} onChange={handleBetChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
+          </Box>
+        </Typography>
+        <Button disabled={startGame} onClick={() => setStartGame(true)} variant="contained" className="mb-4">
+          Bet
+        </Button>
+      </Box>
       <Grid container>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Card sx={{ p: 1 }}>
@@ -53,18 +72,22 @@ const GuessMyNumber = () => {
               <Typography gutterBottom variant="h6" component="div">
                 {message} - (Betweeen 1 to 20)
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Score: {score}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Highscore: {highScore}
-              </Typography>
-              <TextField id="standard-basic" label="Enter your number" variant="standard" value={guess} onChange={(e) => setGuess(e.target.value)} />
+              <div className="d-flex justify-content-between">
+                <Typography variant="h6" color="text.secondary">
+                  Score: <strong>{score}</strong>
+                </Typography>
+                <Typography variant="h6" color="text.secondary">
+                  Highscore: <strong>{highScore}</strong>
+                </Typography>
+              </div>
+              {startGame && <TextField label="Enter your number" variant="standard" value={guess} onChange={(e) => setGuess(e.target.value)} className="mt-2" />}
             </CardContent>
             <CardActions>
-              <Button variant="contained" onClick={checkGuess} disabled={isGameEnded}>
-                Check
-              </Button>
+              {startGame && (
+                <Button variant="contained" onClick={checkGuess} disabled={isGameEnded}>
+                  Check
+                </Button>
+              )}
               {isGameEnded && (
                 <Button variant="contained" onClick={playAgain}>
                   Play Again
@@ -74,7 +97,7 @@ const GuessMyNumber = () => {
           </Card>
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
 

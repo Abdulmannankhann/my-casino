@@ -73,3 +73,7 @@ export const muiCardShadow = {
     boxShadow: 5,
   },
 };
+
+export const valuetext = (value) => {
+  return `${value}`;
+};
