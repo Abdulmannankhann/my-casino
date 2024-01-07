@@ -41,8 +41,8 @@ export const marks = [
   },
 ];
 
-export const bettingMarks = () => {
-  return Array.from({ length: 37 }, (value, index) => ({
+export const bettingMarks = (length) => {
+  return Array.from({ length: length }, (value, index) => ({
     value: index,
     label: index.toString(),
   }));

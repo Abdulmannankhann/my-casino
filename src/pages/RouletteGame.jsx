@@ -240,7 +240,7 @@ const RouletteGame = () => {
             <Typography>
               Choose any one number
               <Box sx={{ mt: 4 }}>
-                <Slider value={bettingNumber} onChange={handleSingleBetNumberChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={1} marks={bettingMarks()} valueLabelDisplay="on" max={36} />
+                <Slider value={bettingNumber} onChange={handleSingleBetNumberChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={1} marks={bettingMarks(37)} valueLabelDisplay="on" max={36} />
               </Box>
             </Typography>
           </Box>

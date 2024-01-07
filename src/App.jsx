@@ -32,6 +32,9 @@ import Withdraw from "./pages/Withdraw";
 import BitCasino from "./assets/images/bitCasino.svg";
 import GuessMyNumber from "./pages/GuessMyNumber";
 import Tenzies from "./pages/Tenzies";
+import BlackJack from "./pages/BlackJack.tsx";
+import ExtensionIcon from "@mui/icons-material/Extension";
+import CasinoIcon from "@mui/icons-material/Casino";
 
 const drawerWidth = 240;
 
@@ -101,7 +104,7 @@ function ResponsiveDrawer(props) {
         </ListItem>
       </List>
       <List>
-        {["Tik-Tak-Toe", "Roulette", "Guess-My-Number", "Tenzies"].map((text, index) => (
+        {["Blackjack", "Roulette", "Tik-Tak-Toe", "Guess-My-Number", "Tenzies"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => {
@@ -125,12 +128,12 @@ function ResponsiveDrawer(props) {
               )}
               {index == 3 && (
                 <ListItemIcon>
-                  <SmartToyIcon />
+                  <ExtensionIcon />
                 </ListItemIcon>
               )}
               {index == 4 && (
                 <ListItemIcon>
-                  <SmartToyIcon />
+                  <CasinoIcon />
                 </ListItemIcon>
               )}
               <ListItemText primary={text} />
@@ -226,6 +229,7 @@ function ResponsiveDrawer(props) {
               <Route path="/roulette" element={<RouletteGame />} />
               <Route path="/guess-my-number" element={<GuessMyNumber />} />
               <Route path="/tenzies" element={<Tenzies />} />
+              <Route path="/blackjack" element={<BlackJack />} />
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<div>404</div>} />
