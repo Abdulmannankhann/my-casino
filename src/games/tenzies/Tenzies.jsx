@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Die from "../../components/tenzies/Die";
 import { nanoid } from "nanoid";
 import { Box, Button, Card, CardActions, CardContent, Grid, Slider, Typography } from "@mui/material";
@@ -16,6 +17,7 @@ const Tenzies = () => {
   const [bestTime, setBestTime] = React.useState(JSON.parse(localStorage.getItem("time")) || 0);
 
   const [startTime, setStartTime] = React.useState(null);
+  const [startGame, setStartGame] = React.useState(false);
   const [now, setNow] = React.useState(null);
 
   const intervalRef = React.useRef(null);
@@ -75,6 +77,10 @@ const Tenzies = () => {
   }
 
   function rollDice() {
+    if (!startGame) {
+      alert("Please Choose a bet!");
+      return;
+    }
     if (start) {
       if (!tenzies) {
         setDice((oldDice) =>
@@ -103,6 +109,7 @@ const Tenzies = () => {
     setStart(false);
     setDice(allNewDice());
     setRolls(0);
+    setStartGame(false);
   };
 
   function holdDice(id) {
@@ -126,64 +133,69 @@ const Tenzies = () => {
         <Typography>
           {start ? "Game Started" : "Choose Bet Amount"}
           <Box sx={{ mt: 4 }}>
-            <Slider value={bet} onChange={handleBetChange} disabled={start} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
+            <Slider size="small" value={bet} onChange={handleBetChange} disabled={start} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
           </Box>
         </Typography>
+        <Button size="small" disabled={startGame} onClick={() => setStartGame(true)} variant="contained" className="mb-4">
+          Bet
+        </Button>
       </Box>
-      <Grid container>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Card sx={{ p: 1 }}>
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                🎲Tenzies
-              </Typography>
-              <div className="d-flex justify-content-between mb-3">
-                <div className="timer">Current Time: {secondsPassed.toFixed(2)}s</div>
-                {bestTime !== 0 && (
-                  <div>
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
+        <Grid container>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Card sx={{ p: 1 }}>
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="div">
+                  🎲Tenzies
+                </Typography>
+                <div className="d-flex justify-content-between mb-3">
+                  <div className="timer">Current Time: {secondsPassed.toFixed(2)}s</div>
+                  {bestTime !== 0 && (
+                    <div>
+                      <Typography>
+                        Best Time:{" "}
+                        <span>
+                          <strong>{bestTime}s</strong>
+                        </span>
+                      </Typography>
+                    </div>
+                  )}
+                </div>
+                <Typography variant="body2" color="text.secondary" className="mb-3">
+                  Roll until all dice are the same.
+                  <br />
+                  Click each die to freeze it at its current value between rolls.
+                </Typography>
+                <div className="dice-container mb-5">{diceElements}</div>
+
+                <div className="d-flex justify-content-between">
+                  <Typography>
+                    Rolls: <span>{rolls}</span>
+                  </Typography>
+                  {best !== 0 && (
                     <Typography>
-                      Best Time:{" "}
+                      Best:{" "}
                       <span>
-                        <strong>{bestTime}s</strong>
+                        <strong>{best}</strong>
                       </span>
                     </Typography>
-                  </div>
-                )}
-              </div>
-              <Typography variant="body2" color="text.secondary" className="mb-3">
-                Roll until all dice are the same.
-                <br />
-                Click each die to freeze it at its current value between rolls.
-              </Typography>
-              <div className="dice-container mb-5">{diceElements}</div>
-
-              <div className="d-flex justify-content-between">
-                <Typography>
-                  Rolls: <span>{rolls}</span>
-                </Typography>
-                {best !== 0 && (
-                  <Typography>
-                    Best:{" "}
-                    <span>
-                      <strong>{best}</strong>
-                    </span>
-                  </Typography>
-                )}
-              </div>
-            </CardContent>
-            <CardActions>
-              <Button variant="contained" onClick={rollDice} disabled={winner}>
-                {!start ? "Start Game" : "Roll"}
-              </Button>
-              {winner && tenzies && (
-                <Button variant="contained" onClick={resetGame}>
-                  New Game
+                  )}
+                </div>
+              </CardContent>
+              <CardActions>
+                <Button size="small" variant="contained" onClick={rollDice} disabled={winner}>
+                  {!start ? "Start Game" : "Roll"}
                 </Button>
-              )}
-            </CardActions>
-          </Card>
+                {winner && tenzies && (
+                  <Button size="small" variant="contained" onClick={resetGame}>
+                    New Game
+                  </Button>
+                )}
+              </CardActions>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+      </motion.div>
     </>
   );
 };

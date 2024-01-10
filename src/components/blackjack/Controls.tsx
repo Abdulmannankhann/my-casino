@@ -51,10 +51,10 @@ const Controls: React.FC<ControlsProps> = ({ startGame, setStartGame, gameState,
           <Typography>
             {startGame ? "Game Started" : "Choose Bet Amount"}
             <Box sx={{ mt: 4 }}>
-              <Slider value={amount} onChange={amountChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
+              <Slider size="small" value={amount} onChange={amountChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
             </Box>
           </Typography>
-          <Button disabled={startGame} onClick={() => onBetClick()} variant="contained" className="mb-4">
+          <Button size="small" disabled={startGame} onClick={() => onBetClick()} variant="contained" className="mb-4">
             Bet
           </Button>
         </Box>

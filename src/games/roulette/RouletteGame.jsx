@@ -1,4 +1,5 @@
-import { Box, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slider, Stack, Switch, Typography } from "@mui/material";
+import { Box, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slider, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
 import { bettingMarks, isOddOrEven, marks, valuetext } from "../../utils/functions";
@@ -160,15 +161,15 @@ const RouletteGame = () => {
         <Typography>
           {startGame ? "Game Started" : "Choose Bet Amount"}
           <Box sx={{ mt: 4 }}>
-            <Slider value={bet} onChange={handleBetChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
+            <Slider size="small" value={bet} onChange={handleBetChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={10} marks={marks} valueLabelDisplay="on" />
           </Box>
         </Typography>
-        <Button disabled={startGame} onClick={handleStartGame} variant="contained" className="mb-4">
+        <Button size="small" disabled={startGame} onClick={handleStartGame} variant="contained" className="mb-4">
           Spin Wheel
         </Button>
       </Box>
 
-      <div className="d-flex align-items-center justify-content-center">
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="d-flex align-items-center justify-content-center">
         <Wheel
           mustStartSpinning={mustSpin}
           prizeNumber={prizeNumber}
@@ -191,7 +192,7 @@ const RouletteGame = () => {
           radiusLineColor={radiusLineColor}
           radiusLineWidth={radiusLineWidth}
         />
-      </div>
+      </motion.div>
 
       {/* betting area */}
       <Box>
@@ -216,16 +217,20 @@ const RouletteGame = () => {
               onClick={() => {
                 setBettingNumber("odd");
               }}
+              size="small"
             >
               Odd
             </Button>
-            <Button disabled>Choose Option</Button>
+            <Button size="small" disabled>
+              Choose Option
+            </Button>
             <Button
               disabled={startGame}
               variant={bettingNumber === "even" ? "contained" : "outlined"}
               onClick={() => {
                 setBettingNumber("even");
               }}
+              size="small"
             >
               Even
             </Button>
@@ -236,7 +241,7 @@ const RouletteGame = () => {
             <Typography>
               Choose any one number
               <Box sx={{ mt: 4 }}>
-                <Slider value={bettingNumber} onChange={handleSingleBetNumberChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={1} marks={bettingMarks(37)} valueLabelDisplay="on" max={36} />
+                <Slider size="small" value={bettingNumber} onChange={handleSingleBetNumberChange} disabled={startGame} aria-label="Always visible" getAriaValueText={valuetext} step={1} marks={bettingMarks(37)} valueLabelDisplay="on" max={36} />
               </Box>
             </Typography>
           </Box>

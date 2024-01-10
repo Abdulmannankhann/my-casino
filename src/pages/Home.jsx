@@ -1,12 +1,52 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import TicTacToeLogo from "../assets/images/tiktaktoe.png";
+import BlackjackLogo from "../assets/images/blackjack.png";
 import RouletteLogo from "../assets/images/roulette.png";
-import SlotsLogo from "../assets/images/slots.jpg";
+import TicTacToeLogo from "../assets/images/tiktaktoe.png";
+import GuessMyNumberLogo from "../assets/images/guessmynumber.jpg";
+import HoldTheDiceLogo from "../assets/images//tenzies.png";
 import { CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import { Card as MuiCard } from "@mui/material";
-import { Button as MuiButton } from "@mui/material";
+import { Card } from "@mui/material";
+import { Button } from "@mui/material";
 import { muiCardStyle } from "../utils/functions";
+
+const games = [
+  {
+    id: 1,
+    name: "Blackjack",
+    route: "blackjack",
+    logo: BlackjackLogo,
+    bannerText: "Win amazing prizes!",
+  },
+  {
+    id: 2,
+    name: "Roulette",
+    route: "roulette",
+    logo: RouletteLogo,
+    bannerText: "Unlock incredible rewards!",
+  },
+  {
+    id: 3,
+    name: "Tic Tac Toe",
+    route: "tic-tac-toe",
+    logo: TicTacToeLogo,
+    bannerText: "Seize awesome prizes!",
+  },
+  {
+    id: 4,
+    name: "Guess My Number",
+    route: "guess-my-number",
+    logo: GuessMyNumberLogo,
+    bannerText: "Claim spectacular winnings!",
+  },
+  {
+    id: 5,
+    name: "Hold The Dice",
+    route: "hold-the-dice",
+    logo: HoldTheDiceLogo,
+    bannerText: "Snag marvelous rewards!",
+  },
+];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,62 +54,28 @@ const Home = () => {
   return (
     <>
       <Grid spacing={2} container>
-        <Grid item lg={3} md={3} sm={3}>
-          <MuiCard sx={muiCardStyle}>
-            <CardMedia sx={{ height: 200 }} image={TicTacToeLogo} />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Tik Tak Toe
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Win amazing prizes!
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <MuiButton size="small" onClick={() => navigate("/tik-tak-toe")}>
-                Play Now
-              </MuiButton>
-            </CardActions>
-          </MuiCard>
-        </Grid>
-
-        <Grid item lg={3} md={3} sm={3}>
-          <MuiCard sx={muiCardStyle}>
-            <CardMedia sx={{ height: 200 }} image={RouletteLogo} />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Roulette
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Win amazing prizes!
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <MuiButton size="small" onClick={() => navigate("/roulette")}>
-                Play Now
-              </MuiButton>
-            </CardActions>
-          </MuiCard>
-        </Grid>
-
-        {/*<Grid item lg={3} md={3} sm={3}>
-          <MuiCard sx={muiCardStyle}>
-            <CardMedia sx={{ height: 200 }} image={SlotsLogo} />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Slots
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Win amazing prizes!
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <MuiButton size="small" onClick={() => navigate("/slots")}>
-                Play Now
-              </MuiButton>
-            </CardActions>
-          </MuiCard>
-        </Grid>*/}
+        {games.map((game) => {
+          return (
+            <Grid item key={game.id}>
+              <Card sx={muiCardStyle}>
+                <CardMedia sx={{ height: 150, width: 200 }} image={game.logo} />
+                <CardContent>
+                  <Typography variant="h6" component="div">
+                    {game.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {game.bannerText}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" onClick={() => navigate(`/${game.route}`)} variant="contained">
+                    Play Now
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          );
+        })}
       </Grid>
     </>
   );

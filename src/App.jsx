@@ -104,34 +104,34 @@ function ResponsiveDrawer(props) {
         </ListItem>
       </List>
       <List>
-        {["Blackjack", "Roulette", "Tic-Tac-Toe", "Guess-My-Number", "Tenzies"].map((text, index) => (
+        {["Blackjack", "Roulette", "Tic-Tac-Toe", "Guess-My-Number", "Hold-The-Dice"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => {
                 navigate(`/${text.toLowerCase()}`);
               }}
             >
-              {index == 0 && (
+              {index === 0 && (
                 <ListItemIcon>
                   <VideogameAssetIcon />
                 </ListItemIcon>
               )}
-              {index == 1 && (
+              {index === 1 && (
                 <ListItemIcon>
                   <GamesIcon />
                 </ListItemIcon>
               )}
-              {index == 2 && (
+              {index === 2 && (
                 <ListItemIcon>
                   <SmartToyIcon />
                 </ListItemIcon>
               )}
-              {index == 3 && (
+              {index === 3 && (
                 <ListItemIcon>
                   <ExtensionIcon />
                 </ListItemIcon>
               )}
-              {index == 4 && (
+              {index === 4 && (
                 <ListItemIcon>
                   <CasinoIcon />
                 </ListItemIcon>
@@ -228,7 +228,7 @@ function ResponsiveDrawer(props) {
               <Route path="/tic-tac-toe" element={<TicTacToe />} />
               <Route path="/roulette" element={<RouletteGame />} />
               <Route path="/guess-my-number" element={<GuessMyNumber />} />
-              <Route path="/tenzies" element={<Tenzies />} />
+              <Route path="/hold-the-dice" element={<Tenzies />} />
               <Route path="/blackjack" element={<BlackJack />} />
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/login" element={<Login />} />
