@@ -14,7 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import TikTakToe from "./games/tictactoe/TikTakToe.jsx";
+import TicTacToe from "./games/tictactoe/TicTacToe.jsx";
 import Home from "./pages/Home";
 import RouletteGame from "./games/roulette/RouletteGame.jsx";
 import { WagmiConfig } from "wagmi";
@@ -104,7 +104,7 @@ function ResponsiveDrawer(props) {
         </ListItem>
       </List>
       <List>
-        {["Blackjack", "Roulette", "Tik-Tak-Toe", "Guess-My-Number", "Tenzies"].map((text, index) => (
+        {["Blackjack", "Roulette", "Tic-Tac-Toe", "Guess-My-Number", "Tenzies"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => {
@@ -225,7 +225,7 @@ function ResponsiveDrawer(props) {
             <Toolbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/tik-tak-toe" element={<TikTakToe />} />
+              <Route path="/tic-tac-toe" element={<TicTacToe />} />
               <Route path="/roulette" element={<RouletteGame />} />
               <Route path="/guess-my-number" element={<GuessMyNumber />} />
               <Route path="/tenzies" element={<Tenzies />} />

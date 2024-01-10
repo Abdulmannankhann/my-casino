@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import TikTakToeLogo from "../assets/images/tiktaktoe.png";
+import TicTacToeLogo from "../assets/images/tiktaktoe.png";
 import RouletteLogo from "../assets/images/roulette.png";
 import SlotsLogo from "../assets/images/slots.jpg";
 import { CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
@@ -16,7 +16,7 @@ const Home = () => {
       <Grid spacing={2} container>
         <Grid item lg={3} md={3} sm={3}>
           <MuiCard sx={muiCardStyle}>
-            <CardMedia sx={{ height: 200 }} image={TikTakToeLogo} />
+            <CardMedia sx={{ height: 200 }} image={TicTacToeLogo} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Tik Tak Toe

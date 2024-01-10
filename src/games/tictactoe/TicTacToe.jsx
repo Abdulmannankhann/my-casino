@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { addPoints, removePoints } from "../../redux/userRedux";
 import { marks, valuetext } from "../../utils/functions";
 
-function TikTakToe() {
+function TicTacToe() {
   const dispatch = useDispatch();
   const [squares, setSquares] = useState(Array(9).fill(""));
   const [turn, setTurn] = useState("x");
@@ -110,6 +110,7 @@ function TikTakToe() {
             </div>
           )}
         </AnimatePresence>
+
         <Dialog open={winner} onClose={resetGame} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
           <DialogTitle id="alert-dialog-title">Congratulations 🎉 {winner} wins!</DialogTitle>
           <DialogContent>
@@ -137,4 +138,4 @@ function TikTakToe() {
   );
 }
 
-export default TikTakToe;
+export default TicTacToe;
