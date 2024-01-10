@@ -6,6 +6,8 @@ import jsonData from "../../deck.json";
 import { useSelector } from "react-redux";
 import WinningModal from "../../components/modals/WinningModal.jsx";
 import LoosingModal from "../../components/modals/LoosingModal.jsx";
+import BlackJackLogo from "../../assets/images/blackjack.png";
+import { Card, CardMedia } from "@mui/material";
 
 const Blackjack: React.FC = () => {
   enum GameState {
@@ -261,8 +263,8 @@ const Blackjack: React.FC = () => {
 
   return (
     <>
-      <Status message={message} />
       <Controls startGame={startGame} setStartGame={setStartGame} gameState={gameState} buttonState={buttonState} bet={bet} betEvent={placeBet} hitEvent={hit} standEvent={stand} resetEvent={resetGame} />
+      <Status message={message} />
       <div className="d-flex justify-content-between">
         <Hand title={`Your Hand (${userScore})`} cards={userCards} />
         <Hand title={`Dealer's Hand (${dealerScore})`} cards={dealerCards} />

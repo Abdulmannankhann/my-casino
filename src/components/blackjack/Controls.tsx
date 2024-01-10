@@ -60,13 +60,13 @@ const Controls: React.FC<ControlsProps> = ({ startGame, setStartGame, gameState,
         </Box>
         {gameState !== 0 && (
           <Stack direction="row" spacing={1} className="mt-1 d-flex justify-content-center">
-            <Button onClick={() => hitEvent()} disabled={buttonState.hitDisabled} variant="contained">
+            <Button onClick={() => hitEvent()} disabled={buttonState.hitDisabled} variant="contained" size="small">
               Hit
             </Button>
-            <Button onClick={() => standEvent()} disabled={buttonState.standDisabled} variant="contained">
+            <Button onClick={() => standEvent()} disabled={buttonState.standDisabled} variant="contained" size="small">
               Stand
             </Button>
-            <Button onClick={() => resetEvent()} disabled={buttonState.resetDisabled} variant="contained">
+            <Button onClick={() => resetEvent()} disabled={buttonState.resetDisabled} variant="contained" size="small">
               Reset
             </Button>
           </Stack>
